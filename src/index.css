@@ -1,0 +1,227 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Arcade Gaming Design System - All colors MUST be HSL */
+
+@layer base {
+  :root {
+    /* Arcade Color Palette */
+    --background: 225 25% 6%;
+    --foreground: 180 100% 90%;
+
+    --card: 225 25% 8%;
+    --card-foreground: 180 100% 90%;
+
+    --popover: 225 25% 8%;
+    --popover-foreground: 180 100% 90%;
+
+    --primary: 180 100% 50%;
+    --primary-foreground: 225 25% 6%;
+
+    --secondary: 300 100% 50%;
+    --secondary-foreground: 225 25% 6%;
+
+    --muted: 225 25% 12%;
+    --muted-foreground: 180 50% 70%;
+
+    --accent: 120 100% 50%;
+    --accent-foreground: 225 25% 6%;
+
+    --destructive: 0 100% 60%;
+    --destructive-foreground: 225 25% 6%;
+
+    --border: 180 100% 25%;
+    --input: 225 25% 12%;
+    --ring: 180 100% 50%;
+
+    --radius: 0.5rem;
+
+    /* Arcade-specific tokens */
+    --neon-cyan: 180 100% 50%;
+    --neon-magenta: 300 100% 50%;
+    --neon-lime: 120 100% 50%;
+    --neon-yellow: 60 100% 50%;
+    --space-dark: 225 25% 6%;
+    --space-medium: 225 25% 12%;
+    --space-light: 225 25% 18%;
+
+    /* Gradients */
+    --gradient-neon: linear-gradient(135deg, hsl(var(--neon-cyan)), hsl(var(--neon-magenta)));
+    --gradient-arcade: linear-gradient(180deg, hsl(var(--space-medium)), hsl(var(--space-dark)));
+    --gradient-glow: radial-gradient(circle, hsl(var(--neon-cyan) / 0.3), transparent);
+
+    /* Shadows and glows */
+    --glow-cyan: 0 0 20px hsl(var(--neon-cyan) / 0.6);
+    --glow-magenta: 0 0 20px hsl(var(--neon-magenta) / 0.6);
+    --glow-lime: 0 0 20px hsl(var(--neon-lime) / 0.6);
+    --shadow-arcade: 0 8px 32px hsl(var(--space-dark) / 0.8);
+
+    /* Animations */
+    --transition-glow: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Orbitron', 'Courier New', monospace;
+  }
+}
+
+@layer components {
+  /* Arcade UI Components */
+  .arcade-border {
+    @apply border-2 border-primary relative;
+    background: linear-gradient(45deg, transparent 30%, hsl(var(--primary) / 0.1) 50%, transparent 70%);
+    box-shadow: var(--glow-cyan), inset 0 1px 0 hsl(var(--primary) / 0.2);
+  }
+
+  .neon-glow {
+    @apply relative;
+    filter: drop-shadow(var(--glow-cyan));
+    transition: var(--transition-glow);
+  }
+
+  .neon-glow:hover {
+    filter: drop-shadow(0 0 30px hsl(var(--primary) / 0.8));
+  }
+
+  .arcade-grid {
+    background-image: 
+      linear-gradient(hsl(var(--border) / 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .score-digit {
+    @apply font-mono text-primary tabular-nums;
+    text-shadow: 0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary) / 0.5);
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+  }
+
+  .tournament-status {
+    @apply relative overflow-hidden;
+    background: var(--gradient-arcade);
+    border: 1px solid hsl(var(--border));
+    box-shadow: var(--shadow-arcade);
+  }
+
+  .tournament-status::before {
+    content: '';
+    @apply absolute inset-0 opacity-10;
+    background: var(--gradient-glow);
+    animation: scan-line 3s ease-in-out infinite;
+  }
+
+  .encrypted-indicator {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold;
+    background: hsl(var(--neon-magenta) / 0.1);
+    border: 1px solid hsl(var(--neon-magenta) / 0.3);
+    color: hsl(var(--neon-magenta));
+    box-shadow: 0 0 15px hsl(var(--neon-magenta) / 0.3);
+  }
+
+  .revealed-indicator {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold;
+    background: hsl(var(--neon-lime) / 0.1);
+    border: 1px solid hsl(var(--neon-lime) / 0.3);
+    color: hsl(var(--neon-lime));
+    box-shadow: 0 0 15px hsl(var(--neon-lime) / 0.3);
+  }
+}
+
+@layer utilities {
+  .text-neon-cyan { color: hsl(var(--neon-cyan)); }
+  .text-neon-magenta { color: hsl(var(--neon-magenta)); }
+  .text-neon-lime { color: hsl(var(--neon-lime)); }
+  .text-neon-yellow { color: hsl(var(--neon-yellow)); }
+  
+  .bg-space-dark { background-color: hsl(var(--space-dark)); }
+  .bg-space-medium { background-color: hsl(var(--space-medium)); }
+  .bg-space-light { background-color: hsl(var(--space-light)); }
+}
+
+/* Arcade Animations */
+@keyframes pulse-glow {
+  from { 
+    text-shadow: 0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary) / 0.5);
+  }
+  to { 
+    text-shadow: 0 0 20px hsl(var(--primary)), 0 0 30px hsl(var(--primary) / 0.8);
+  }
+}
+
+@keyframes scan-line {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes data-stream {
+  0% { transform: translateY(100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-100%); opacity: 0; }
+}
